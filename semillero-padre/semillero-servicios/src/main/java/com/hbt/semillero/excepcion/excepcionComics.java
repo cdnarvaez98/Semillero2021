@@ -21,7 +21,7 @@ public class excepcionComics extends Exception{
 	private boolean falla;
 	
 	/**
-	 * Método constructor que permite personlizar el mensaje de la excepción, recibe como parametros: la lista completa de comics, la lista de comics activos, la lista de comics inactivos, y false
+	 * Método constructor para el mensaje de la excepcion a generar en la clase CreacionComicTest
 	 */
 	public excepcionComics (int tamanoListaTotal, int numeroTotalActivos, int numeroTotalInactivos, boolean falla) {
 		super("Se ha detectado que de "+tamanoListaTotal+" comics se encontraron que "+numeroTotalActivos+" se encuentran activos y "+numeroTotalInactivos+" inactivos.");
