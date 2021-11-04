@@ -24,7 +24,7 @@ public class ComicDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String id;
+	private Long id;
 	private String nombre;
 	private String editorial;
 	private TematicaEnum tematicaEnum;
@@ -36,6 +36,8 @@ public class ComicDTO implements Serializable {
 	private LocalDate fechaVenta;
 	private EstadoEnum estadoEnum;
 	private Long cantidad;
+	private Boolean exitoso;
+	private String mensajeEjecucion;
 
 	
 	/**
@@ -60,7 +62,7 @@ public class ComicDTO implements Serializable {
 	 * @param estadoEnum
 	 * @param cantidad
 	 */
-	public ComicDTO(String id, String nombre, String editorial, TematicaEnum tematicaEnum, String coleccion,
+	public ComicDTO(Long id, String nombre, String editorial, TematicaEnum tematicaEnum, String coleccion,
 			Integer numeroPaginas, BigDecimal precio, String autores, Boolean color, LocalDate fechaVenta,
 			EstadoEnum estadoEnum, Long cantidad) {
 		super();
@@ -76,6 +78,8 @@ public class ComicDTO implements Serializable {
 		this.fechaVenta = fechaVenta;
 		this.estadoEnum = estadoEnum;
 		this.cantidad = cantidad;
+		this.exitoso = exitoso;
+		this.mensajeEjecucion = mensajeEjecucion;
 	}
 
 	/**
@@ -83,7 +87,7 @@ public class ComicDTO implements Serializable {
 	 * 
 	 * @return El id asociado a la clase
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -92,7 +96,7 @@ public class ComicDTO implements Serializable {
 	 * 
 	 * @param id El nuevo id a modificar.
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -293,8 +297,43 @@ public class ComicDTO implements Serializable {
 	public void setCantidad(Long cantidad) {
 		this.cantidad = cantidad;
 	}
-
 	
+	/**
+	 * Metodo encargado de retornar el valor del atributo exitoso
+	 * 
+	 * @return El exitoso asociado a la clase
+	 */
+	public Boolean getExitoso() {
+		return exitoso;
+	}
+
+	/**
+	 * Metodo encargado de modificar el valor del atributo exitoso
+	 * 
+	 * @param cantidad El nuevo exitoso a modificar.
+	 */
+	public void setExitoso(Boolean exitoso) {
+		this.exitoso = exitoso;
+	}
+
+	/**
+	 * Metodo encargado de retornar el valor del atributo mensajeEjecucion
+	 * 
+	 * @return El mensajeEjecucion asociado a la clase
+	 */
+	public String getMensajeEjecucion() {
+		return mensajeEjecucion;
+	}
+	
+	/**
+	 * Metodo encargado de modificar el valor del atributo mensajeEjecucion
+	 * 
+	 * @param cantidad El nuevo mensajeEjecucion a modificar.
+	 */
+	public void setMensajeEjecucion(String mensajeEjecucion) {
+		this.mensajeEjecucion = mensajeEjecucion;
+	}
+
 	/**
 	 * Método encargado de convertir los datos recibidos en JSON al tipo ComicDTO.
 	 * <b>Caso de Uso:</b>

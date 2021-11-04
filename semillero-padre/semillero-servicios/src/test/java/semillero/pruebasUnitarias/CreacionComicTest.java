@@ -70,25 +70,25 @@ public class CreacionComicTest {
 	@BeforeTest
 	public void cargarComics() {
 
-		ComicDTO comic1 = new ComicDTO("1", "Dragon Ball GT", "Planeta Cómic", TematicaEnum.AVENTURAS, "Manga", 300,
+		ComicDTO comic1 = new ComicDTO(1L, "Dragon Ball GT", "Planeta Cómic", TematicaEnum.AVENTURAS, "Manga", 300,
 				new BigDecimal(56000), "Akira Toriyama", false, LocalDate.of(1992, 5, 10), EstadoEnum.ACTIVO, 50L);
-		ComicDTO comic2 = new ComicDTO("2", "Bleach", "Norma", TematicaEnum.FANTASTICO, "Manga", 200,
+		ComicDTO comic2 = new ComicDTO(2L, "Bleach", "Norma", TematicaEnum.FANTASTICO, "Manga", 200,
 				new BigDecimal(56000), "Akira Toriyama", false, LocalDate.of(1900, 1, 13), EstadoEnum.INACTIVO, 100L);
-		ComicDTO comic3 = new ComicDTO("3", "Uzumaki", "Norma", TematicaEnum.HORROR, "Manga", 100,
+		ComicDTO comic3 = new ComicDTO(3L, "Uzumaki", "Norma", TematicaEnum.HORROR, "Manga", 100,
 				new BigDecimal(56000), "Akira Toriyama", true, LocalDate.of(2010, 1, 13), EstadoEnum.ACTIVO, 20L);
-		ComicDTO comic4 = new ComicDTO("4", "Haikyuu!", "Norma", TematicaEnum.DEPORTIVO, "Manga", 115,
+		ComicDTO comic4 = new ComicDTO(4L, "Haikyuu!", "Norma", TematicaEnum.DEPORTIVO, "Manga", 115,
 				new BigDecimal(56000), "Akira Toriyama", false, LocalDate.of(2015, 1, 13), EstadoEnum.INACTIVO, 80L);
-		ComicDTO comic5 = new ComicDTO("5", "One Piece", "Planeta Cómic", TematicaEnum.AVENTURAS, "Manga", 120,
+		ComicDTO comic5 = new ComicDTO(5L, "One Piece", "Planeta Cómic", TematicaEnum.AVENTURAS, "Manga", 120,
 				new BigDecimal(56000), "Akira Toriyama", true, LocalDate.of(2011, 1, 13), EstadoEnum.ACTIVO, 15L);
-		ComicDTO comic6 = new ComicDTO("6", "Samurai X", "Planeta Cómic", TematicaEnum.AVENTURAS, "Manga", 160,
+		ComicDTO comic6 = new ComicDTO(6L, "Samurai X", "Planeta Cómic", TematicaEnum.AVENTURAS, "Manga", 160,
 				new BigDecimal(56000), "Akira Toriyama", false, LocalDate.of(2020, 1, 13), EstadoEnum.INACTIVO, 22L);
-		ComicDTO comic7 = new ComicDTO("7", "Dune", "Norma", TematicaEnum.CIENCIA_FICCION, "Novela grafica", 220,
+		ComicDTO comic7 = new ComicDTO(7L, "Dune", "Norma", TematicaEnum.CIENCIA_FICCION, "Novela grafica", 220,
 				new BigDecimal(100000), "Akira Toriyama", false, LocalDate.of(2005, 1, 13), EstadoEnum.ACTIVO, 100L);
-		ComicDTO comic8 = new ComicDTO("8", "Berserk", "Panini", TematicaEnum.BELICO, "Manga", 100,
+		ComicDTO comic8 = new ComicDTO(8L, "Berserk", "Panini", TematicaEnum.BELICO, "Manga", 100,
 				new BigDecimal(56000), "Akira Toriyama", true, LocalDate.of(1998, 1, 13), EstadoEnum.INACTIVO, 16L);
-		ComicDTO comic9 = new ComicDTO("9", "Avatar", "Panini", TematicaEnum.CIENCIA_FICCION, "Novela grafica", 150,
+		ComicDTO comic9 = new ComicDTO(9L, "Avatar", "Panini", TematicaEnum.CIENCIA_FICCION, "Novela grafica", 150,
 				new BigDecimal(100000), "Akira Toriyama", false, LocalDate.of(1995, 1, 13), EstadoEnum.INACTIVO, 30L);
-		ComicDTO comic10 = new ComicDTO("10", "Chainsaw Man", "Panini", TematicaEnum.HORROR, "Manga", 111,
+		ComicDTO comic10 = new ComicDTO(10L, "Chainsaw Man", "Panini", TematicaEnum.HORROR, "Manga", 111,
 				new BigDecimal(56000), "Akira Toriyama", true, LocalDate.of(2021, 1, 13), EstadoEnum.ACTIVO, 96L);
 
 		comics.add(comic1);
