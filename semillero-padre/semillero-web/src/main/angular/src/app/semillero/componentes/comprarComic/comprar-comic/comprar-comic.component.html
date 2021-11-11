@@ -1,0 +1,36 @@
+<div class="container">
+    <pre>{{ comicDTO | json }}</pre>
+    <pre>{{ nombre | json }}</pre>
+    <form [formGroup]="comprarComicForm">
+        <h1>Comprar Comic</h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="nombreComic">Nombre Comic:</label>
+                <input type="text" class="form-control" id="nombreComic" maxlength="50" formControlName="nombre"
+                    [ngClass]="{ 'is-invalid' :  submitted && f.nombre.errors }">
+                <div *ngIf="submitted && f.nombre.errors">
+                    <span class="text-danger" *ngIf="f.nombre.errors.required">Campo requerido.</span>
+                    <span class="text-danger" *ngIf="f.nombre.errors.maxlength">El campo solo recibe 50
+                        caracteres.</span>
+                </div>
+            </div>
+            <div class="col-6">
+                <label for="cantidadComics">Cantidad a comprar:</label>
+                <input type="number" class="form-control" id="cantidadComics" formControlName="cantidadComics">
+            </div>
+        </div>
+
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-primary" (click)="irAGestionComics(comic)">Comprar</button>
+        </div>
+
+        <div *ngIf="mostrarItem" class="alert alert-info" role="alert">
+            ITEM SELECCIONADO:
+            <pre>{{ mensajeEjecucion | json }}</pre>
+            <button type="button" class="btn btn-primary" (click)="cerrar()">Cerrar</button>
+        </div>
+
+    </form>
+</div>

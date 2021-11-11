@@ -29,7 +29,7 @@ import com.hbt.semillero.enums.EstadoEnum;
 
 /**
  * 
- * @author DIEGO FERNANDO
+ * @author Cristian Daniel Narvaez Medina
  *
  */
 @Path("/SemilleroJPQLRest")

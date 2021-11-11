@@ -78,8 +78,6 @@ public class ComicDTO implements Serializable {
 		this.fechaVenta = fechaVenta;
 		this.estadoEnum = estadoEnum;
 		this.cantidad = cantidad;
-		this.exitoso = exitoso;
-		this.mensajeEjecucion = mensajeEjecucion;
 	}
 
 	/**

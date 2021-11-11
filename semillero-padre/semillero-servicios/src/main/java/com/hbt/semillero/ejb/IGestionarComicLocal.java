@@ -6,8 +6,8 @@ import javax.ejb.Local;
 
 import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.dto.ConsultaNombrePrecioComicDTO;
-import com.hbt.semillero.dto.ResultadoDTO;
-import com.hbt.semillero.dto.consultarComicTamanioNombre;
+import com.hbt.semillero.dto.ConsultarLengthNombreComicDTO;
+
 
 @Local
 public interface IGestionarComicLocal {
@@ -16,11 +16,11 @@ public interface IGestionarComicLocal {
 
 	public ComicDTO crearComic(ComicDTO comicDTO) throws Exception;
 	
-	public ResultadoDTO actualizarComic(Long idComic);
+	public ComicDTO actualizarNombreComic(Long idComic, String nombre);
 	
-	public ResultadoDTO eliminarComic(Long idComic);
+	public ComicDTO eliminarComic(Long idComic);
 	
 	public List<ComicDTO> consultarComics();
 	
-	public consultarComicTamanioNombre consultarComicTamanioNombre(Short lengthComic);
+	public ConsultarLengthNombreComicDTO consultarComicTamanioNombre(Short lengthCadena);
 }

@@ -1,6 +1,5 @@
 package com.hbt.semillero.ejb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,14 +8,14 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.dto.ConsultaNombrePrecioComicDTO;
-import com.hbt.semillero.dto.ResultadoDTO;
+import com.hbt.semillero.dto.ConsultarLengthNombreComicDTO;
 import com.hbt.semillero.entidad.Comic;
-import com.hbt.semillero.dto.consultarComicTamanioNombre;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -63,55 +62,86 @@ public class GestionarComicBean implements IGestionarComicLocal {
 	}
 
 	@Override
-	public ResultadoDTO actualizarComic(Long idComic) {
-		// TODO Auto-generated method stub
-		return null;
+	public ComicDTO actualizarNombreComic(Long idComic, String nombre) {
+		String consulta = "UPDATE Comic c SET c.nombre = :nombre WHERE id = :idComic";
+		ComicDTO comicActualizado = new ComicDTO();
+		try {
+			Query consultaNativa = em.createQuery(consulta);
+			consultaNativa.setParameter("nombre", nombre);
+			consultaNativa.setParameter("idComic", idComic);
+			consultaNativa.executeUpdate();
+			Comic comic = new Comic();
+			if (comic.getId() == idComic) {
+				comicActualizado = convertirComicToComicDTO(comic);
+			}
+			comicActualizado.setExitoso(true);
+			comicActualizado.setMensajeEjecucion("El comic ha sido actualizado exitosamente");
+		} catch (Exception e) {
+			comicActualizado.setExitoso(false);
+			comicActualizado.setMensajeEjecucion("Error al intentar actualizar el comic por nombre");
+		}
+		return comicActualizado;
 	}
 
 	@Override
-	public ResultadoDTO eliminarComic(Long idComic) {
-		// TODO Auto-generated method stub
-		return null;
+	public ComicDTO eliminarComic(Long idComic) {
+		ComicDTO comicEliminado = new ComicDTO();
+		String consulta = "DELETE FROM Comic c WHERE c.id = :idComic";
+		try {
+			Query consultaEliminarUnComic = em.createQuery(consulta);
+			consultaEliminarUnComic.setParameter("idComic", idComic);
+			consultaEliminarUnComic.executeUpdate();
+			Comic comic = new Comic();
+			if (comic.getId() == idComic) {
+				comicEliminado = convertirComicToComicDTO(comic);
+			}
+			comicEliminado.setExitoso(true);
+			comicEliminado.setMensajeEjecucion("El comic fue eliminado correctamente");
+		} catch (NoResultException e) {
+			comicEliminado.setExitoso(false);
+			comicEliminado.setMensajeEjecucion("El id no pertenece a ningún comic");
+		} catch (Exception e) {
+			comicEliminado.setExitoso(false);
+			comicEliminado.setMensajeEjecucion("El comic no pudo ser eliminado, error técnico");
+		}
+		
+		return comicEliminado;
 	}
 
 	@Override
 	public List<ComicDTO> consultarComics() {
-		// TODO Auto-generated method stub
-		return null;
+		String consulta = "SELECT c FROM Comic c";
+		Query consultaTodosComics = em.createQuery(consulta);
+		List<ComicDTO> listaComics = consultaTodosComics.getResultList();
+		return listaComics;
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public consultarComicTamanioNombre consultarComicTamanioNombre(Short lengthComic) {
-		List<String> nombresComics = new ArrayList<>();
-		List<String> comicsNoSuperanTamanio = new ArrayList<>();
-		List<String> comicsSuperanTamanio = new ArrayList<>();
-		
-		nombresComics.add("Dragon Ball Yamcha");
-		nombresComics.add("Captain America Corps 1-5 USA");
-		nombresComics.add("The Spectacular Spider-Man v2 USA ");
-
-		String consulta = "SELECT c.nombre FROM Comic c WHERE c.nombre IN (:nombresComics)";
-		
-		consultarComicTamanioNombre consultarComicTamanioNombre = new consultarComicTamanioNombre();
+	public ConsultarLengthNombreComicDTO consultarComicTamanioNombre(Short lengthCadena) {
+		String consulta = "SELECT c.nombre "
+				        + "FROM Comic c";
+		ConsultarLengthNombreComicDTO resultadoDTO = new ConsultarLengthNombreComicDTO();
 		try {
-			Query consultaNativa = em.createQuery(consulta);
-			consultaNativa.setParameter(":nombresComics", nombresComics);
-			consultarComicTamanioNombre = (consultarComicTamanioNombre) consultaNativa.getResultList();
-			
-			if (consultarComicTamanioNombre.getLengthComic() <= lengthComic) {
-				comicsNoSuperanTamanio.add(consultarComicTamanioNombre.toString());
-			}else {
-				comicsSuperanTamanio.add(consultarComicTamanioNombre.toString());
+			if (lengthCadena > 300) {
+				throw new Exception("La longitud máxima permitida es de 300 carácteres");
 			}
-			consultarComicTamanioNombre.setExitoso(true);
-			consultarComicTamanioNombre.setMensajeEjecucion("Comics procesados exitosamente");
+			Query consultaTamanioCadena = em.createNamedQuery(consulta);
+			List<String> nombresComics = consultaTamanioCadena.getResultList();
+			for (String nombre : nombresComics) {
+				if (nombre.length() >= lengthCadena) {
+					resultadoDTO.getComicsSuperanTamanio().add(nombre);
+				} else {
+					resultadoDTO.getComicsNoSuperanTamanio().add(nombre);
+				}
+			}
+			resultadoDTO.setExitoso(true);
+			resultadoDTO.setMensajeEjecucion("Comics procesados exitosamente");
 		} catch (Exception e) {
-			consultarComicTamanioNombre.setExitoso(false);
-			consultarComicTamanioNombre.setMensajeEjecucion("Se ha presentado un error tecnico");
+			resultadoDTO.setExitoso(false);
+			resultadoDTO.setMensajeEjecucion("Se ha presentado un error tecnico al consultar los comics");
 		}
-
-		return consultarComicTamanioNombre;
+		return resultadoDTO;
 	}
 
 	/**
